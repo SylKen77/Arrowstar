@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: arrowstar
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS : false
+    date-format: yyyy-MM-dd'T'HH:mm:ssZ
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    url: jdbc:h2:~/arrowstarDB;DB_CLOSE_DELAY=-1;MODE=ORACLE;
+    platform: h2
+    sql-script-encoding: UTF-8
+  h2:
+    console:
+      enabled: true
