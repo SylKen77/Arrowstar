@@ -3,16 +3,22 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import {MatToolbarModule} from "@angular/material";
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ToolbarComponent
+
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
