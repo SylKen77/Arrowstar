@@ -1,0 +1,9 @@
+<div class="grid">
+
+  <div class="logo">one</div>
+
+  <ng-container *ngFor="let klant of kassaHomeService.klanten | async">
+    <kassa-home-klant [klant]="klant"></kassa-home-klant>
+  </ng-container>
+
+</div>
