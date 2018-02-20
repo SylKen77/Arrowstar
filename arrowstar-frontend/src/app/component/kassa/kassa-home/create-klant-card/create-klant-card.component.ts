@@ -16,7 +16,7 @@ export class CreateKlantCardComponent implements OnInit {
 
   openDialog(): void {
     let dialogRef = this.dialog.open(CreateKlantDialogComponent, {
-      width: '300px'
+      width: '400px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
