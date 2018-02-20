@@ -1,9 +1,10 @@
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import {KassaHomeKlantDto} from "../model/kassa-home-klant-dto";
-import {Observable} from "rxjs/Observable";
-import {KlantType} from "../model/klant-type";
-import {HttpClient} from "@angular/common/http";
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
+import {CreateGastCommand} from '../command/create-gast-command';
+import {CreateLidCommand} from '../command/create-lid-command';
+import {KassaHomeKlantDto} from '../model/kassa-home-klant-dto';
 
 @Injectable()
 export class KassaHomeService {
@@ -15,19 +16,25 @@ export class KassaHomeService {
   }
 
   public loadKlanten(): Observable<KassaHomeKlantDto[]> {
-    this.httpCient.get('/api/kassa/klanten').subscribe(
-      data => this._klanten.next(data as KassaHomeKlantDto[]),
-      err => console.log(err));
+    this.httpCient.get('/api/kassa/klanten')
+      .subscribe(
+        data => this._klanten.next(data as KassaHomeKlantDto[]),
+        err => console.log(err));
     return this.klanten;
   }
 
-  private buildKlant(id: number, naam: string): KassaHomeKlantDto {
-    let klant: KassaHomeKlantDto = {
-      id: id,
-      type: KlantType.LID,
-      naam: naam,
-      aankopen: []
-    };
-    return klant;
+  public createLid(createLidCommand: CreateLidCommand) {
+    this.httpCient.post('/api/lid/create', createLidCommand)
+      .subscribe(
+        () => this.loadKlanten(),
+        err => console.log(err));
   }
+
+  public createGast(createGastCommand: CreateGastCommand) {
+    this.httpCient.post('/api/gast/create', createGastCommand)
+      .subscribe(
+        () => this.loadKlanten(),
+        err => console.log(err));
+  }
+
 }

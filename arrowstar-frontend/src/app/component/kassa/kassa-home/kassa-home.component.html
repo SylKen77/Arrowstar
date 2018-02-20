@@ -3,7 +3,9 @@
   <div class="logo">one</div>
 
   <ng-container *ngFor="let klant of kassaHomeService.klanten | async">
-    <kassa-home-klant [klant]="klant"></kassa-home-klant>
+    <klant-card [klant]="klant"></klant-card>
   </ng-container>
+
+  <create-klant-card></create-klant-card>
 
 </div>

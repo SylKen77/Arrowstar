@@ -1,0 +1,16 @@
+
+<mat-form-field>
+  <input matInput [(ngModel)]="voornaam" placeholder="voornaam">
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput [(ngModel)]="naam" placeholder="naam">
+</mat-form-field>
+
+<mat-radio-group [(ngModel)]="klantType">
+  <mat-radio-button [value]="klantTypeEnum.GAST" [checked]="true">gast</mat-radio-button>
+  <mat-radio-button [value]="klantTypeEnum.LID">lid</mat-radio-button>
+</mat-radio-group>
+
+<button mat-raised-button (click)="ok()">ok</button>
+<button mat-raised-button (click)="cancel()">cancel</button>
