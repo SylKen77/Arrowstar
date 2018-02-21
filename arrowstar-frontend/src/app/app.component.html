@@ -1,4 +1,23 @@
-<app-toolbar></app-toolbar>
-<router-outlet></router-outlet>
+<mat-sidenav-container class="example-container" (backdropClick)="close()">
+
+  <mat-sidenav #sidenav disableClose (keydown.escape)="close()">
+    <div>
+      <button mat-button routerLink="kassa-home" (click)="sidenav.close()">Home</button>
+    </div>
+    <div>
+      <button mat-button routerLink="kassa" (click)="sidenav.close()">kassa</button>
+    </div>
+    <div>
+      <button mat-button routerLink="bar" (click)="sidenav.close()">bar</button>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content (keydown.escape)="close()">
+    <div (mouseenter)="sidenav.open()" class="navBarOpener"></div>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
 
 

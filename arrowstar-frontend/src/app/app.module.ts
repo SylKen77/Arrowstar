@@ -34,17 +34,17 @@ import {CreateKlantCardComponent} from './component/kassa/kassa-home/create-klan
 import {CreateKlantDialogComponent} from './component/kassa/kassa-home/create-klant-dialog/create-klant-dialog.component';
 import {KassaHomeComponent} from './component/kassa/kassa-home/kassa-home.component';
 import {KlantCardComponent} from './component/kassa/kassa-home/klant-card/klant-card.component';
-import {ToolbarComponent} from './component/toolbar/toolbar.component';
 import {KassaHomeService} from './service/kassa-home.service';
+import {BarComponent} from './component/bar/bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ToolbarComponent,
     KassaHomeComponent,
     KlantCardComponent,
     CreateKlantCardComponent,
-    CreateKlantDialogComponent
+    CreateKlantDialogComponent,
+    BarComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +83,7 @@ import {KassaHomeService} from './service/kassa-home.service';
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule,
+    MatTooltipModule
   ],
   entryComponents: [CreateKlantDialogComponent],
   providers: [KassaHomeService],
