@@ -1,21 +1,26 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {BarComponent} from './component/bar/bar.component';
-import {KassaHomeComponent} from "./component/kassa/kassa-home/kassa-home.component";
+import {HomeComponent} from './component/home/home.component';
+import {KassaComponent} from './component/kassa/kassa.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/kassa-home',
+    redirectTo: '/home',
     pathMatch: 'full'
   },
   {
-    path: 'kassa-home',
-    component: KassaHomeComponent
+    path: 'home',
+    component: HomeComponent
   },
   {
     path: 'bar',
     component: BarComponent
+  },
+  {
+    path: 'kassa',
+    component: KassaComponent
   }
 ];
 

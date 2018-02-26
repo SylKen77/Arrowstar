@@ -30,21 +30,25 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {CreateKlantCardComponent} from './component/kassa/kassa-home/create-klant-card/create-klant-card.component';
-import {CreateKlantDialogComponent} from './component/kassa/kassa-home/create-klant-dialog/create-klant-dialog.component';
-import {KassaHomeComponent} from './component/kassa/kassa-home/kassa-home.component';
-import {KlantCardComponent} from './component/kassa/kassa-home/klant-card/klant-card.component';
-import {KassaHomeService} from './service/kassa-home.service';
+import {CreateKlantCardComponent} from './component/home/create-klant-card/create-klant-card.component';
+import {CreateKlantDialogComponent} from './component/home/create-klant-dialog/create-klant-dialog.component';
+import {KlantCardComponent} from './component/home/klant-card/klant-card.component';
+import {HomeService} from './service/home.service';
 import {BarComponent} from './component/bar/bar.component';
+import { ProductCardComponent } from './component/bar/product-card/product-card.component';
+import { HomeComponent } from './component/home/home.component';
+import { KassaComponent } from './component/kassa/kassa.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    KassaHomeComponent,
     KlantCardComponent,
     CreateKlantCardComponent,
     CreateKlantDialogComponent,
-    BarComponent
+    BarComponent,
+    ProductCardComponent,
+    HomeComponent,
+    KassaComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +90,7 @@ import {BarComponent} from './component/bar/bar.component';
     MatTooltipModule
   ],
   entryComponents: [CreateKlantDialogComponent],
-  providers: [KassaHomeService],
+  providers: [HomeService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

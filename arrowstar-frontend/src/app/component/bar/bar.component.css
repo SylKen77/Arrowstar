@@ -1,0 +1,12 @@
+.bar-container {
+  padding-top: 30px;
+  margin: auto;
+  width: 700px;
+}
+
+.bar-product {
+  width: 100%;
+  background-color: #333337;
+  height: 30px;
+  margin-bottom: 10px;
+}

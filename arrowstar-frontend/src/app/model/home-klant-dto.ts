@@ -1,7 +1,7 @@
 import {KlantType} from "./klant-type";
 import {AankoopDto} from "./aankoop-dto";
 
-export interface KassaHomeKlantDto {
+export interface HomeKlantDto {
 
   id: number;
   type: KlantType;

@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {CreateGastCommand} from '../../../../command/create-gast-command';
-import {CreateLidCommand} from '../../../../command/create-lid-command';
-import {KlantType} from '../../../../model/klant-type';
-import {KassaHomeService} from '../../../../service/kassa-home.service';
+import {CreateGastCommand} from '../../../command/create-gast-command';
+import {CreateLidCommand} from '../../../command/create-lid-command';
+import {KlantType} from '../../../model/klant-type';
+import {HomeService} from '../../../service/home.service';
 
 @Component({
   selector: 'app-create-klant-dialog',
@@ -18,7 +18,7 @@ export class CreateKlantDialogComponent implements OnInit {
 
   public klantTypeEnum = KlantType;
 
-  constructor(public dialogRef: MatDialogRef<CreateKlantDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private kassaHomeService: KassaHomeService) {
+  constructor(public dialogRef: MatDialogRef<CreateKlantDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private homeService: HomeService) {
   }
 
   ngOnInit() {
@@ -35,8 +35,10 @@ export class CreateKlantDialogComponent implements OnInit {
 
   private createKlant() {
     switch (this.klantType) {
-      case KlantType.GAST: return this.createGast();
-      case KlantType.LID: return this.createLid();
+      case KlantType.GAST:
+        return this.createGast();
+      case KlantType.LID:
+        return this.createLid();
     }
   }
 
@@ -45,7 +47,7 @@ export class CreateKlantDialogComponent implements OnInit {
       naam: this.naam,
       voornaam: this.voornaam
     };
-    this.kassaHomeService.createGast(createGastCommand);
+    this.homeService.createGast(createGastCommand);
   }
 
   private createLid() {
@@ -54,6 +56,6 @@ export class CreateKlantDialogComponent implements OnInit {
       voornaam: this.voornaam,
       isZichtbaarOpHomeScreen: true
     };
-    this.kassaHomeService.createLid(createLidCommand);
+    this.homeService.createLid(createLidCommand);
   }
 }

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {KassaHomeKlantDto} from "../../../../model/kassa-home-klant-dto";
+import {HomeKlantDto} from "../../../model/home-klant-dto";
 
 @Component({
   selector: 'klant-card',
@@ -8,7 +8,7 @@ import {KassaHomeKlantDto} from "../../../../model/kassa-home-klant-dto";
 })
 export class KlantCardComponent implements OnInit {
 
-  @Input("klant") public klant: KassaHomeKlantDto;
+  @Input("klant") public klant: HomeKlantDto;
 
   constructor() { }
 

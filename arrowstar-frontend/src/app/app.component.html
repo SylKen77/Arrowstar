@@ -1,8 +1,8 @@
-<mat-sidenav-container class="example-container" (backdropClick)="close()">
+<mat-sidenav-container class="sidenav-container" (backdropClick)="close()">
 
   <mat-sidenav #sidenav disableClose (keydown.escape)="close()">
     <div>
-      <button mat-button routerLink="kassa-home" (click)="sidenav.close()">Home</button>
+      <button mat-button routerLink="home" (click)="sidenav.close()">Home</button>
     </div>
     <div>
       <button mat-button routerLink="kassa" (click)="sidenav.close()">kassa</button>

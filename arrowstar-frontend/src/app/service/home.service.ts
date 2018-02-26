@@ -4,21 +4,21 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import {CreateGastCommand} from '../command/create-gast-command';
 import {CreateLidCommand} from '../command/create-lid-command';
-import {KassaHomeKlantDto} from '../model/kassa-home-klant-dto';
+import {HomeKlantDto} from '../model/home-klant-dto';
 
 @Injectable()
-export class KassaHomeService {
+export class HomeService {
 
-  private _klanten: BehaviorSubject<KassaHomeKlantDto[]> = new BehaviorSubject([]);
+  private _klanten: BehaviorSubject<HomeKlantDto[]> = new BehaviorSubject([]);
   public klanten = this._klanten.asObservable();
 
   constructor(private httpCient: HttpClient) {
   }
 
-  public loadKlanten(): Observable<KassaHomeKlantDto[]> {
+  public loadKlanten(): Observable<HomeKlantDto[]> {
     this.httpCient.get('/api/kassa/klanten')
       .subscribe(
-        data => this._klanten.next(data as KassaHomeKlantDto[]),
+        data => this._klanten.next(data as HomeKlantDto[]),
         err => console.log(err));
     return this.klanten;
   }
