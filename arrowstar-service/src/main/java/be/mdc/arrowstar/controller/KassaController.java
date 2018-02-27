@@ -30,6 +30,11 @@ public class KassaController {
         return kassaService.getKlanten().stream().sorted(Comparator.comparing(KlantDTO::getType).thenComparing(KlantDTO::getNaam)).collect(Collectors.toList());
     }
 
+    @GetMapping("/klant/{persoonId}")
+    public KlantDTO getKlant(@PathVariable(name = "persoonId") int persoonId) {
+        return kassaService.getKlant(persoonId);
+    }
+
     @GetMapping("/producten")
     public List<ProductDTO> getProducten() {
         return kassaService.getProducten().stream().sorted(Comparator.comparing(ProductDTO::getSortOrder).thenComparing(ProductDTO::getNaam)).collect(Collectors.toList());

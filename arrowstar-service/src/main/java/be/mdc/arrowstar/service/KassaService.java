@@ -41,6 +41,11 @@ public class KassaService {
 		return kassaMapper.kassaToKassaDto(getKassa());
 	}
 
+    public KlantDTO getKlant(int persoonId) {
+	    return klantMapper.persoonToKlantDto(persoonRepository.findOne(persoonId));
+    }
+
+
 	public List<KlantDTO> getKlanten() {
 		List<KlantDTO> klanten = lidRepository.findAllByVerwijderdOpIsNullAndZichtbaarOpHomeScreenIsTrue().map(klantMapper::lidToKlantDto).collect(Collectors.toList());
 		klanten.addAll(gastRepository.findAllByAfgerekendIsFalse().map(klantMapper::gastToKlantDto).collect(Collectors.toList()));

@@ -19,7 +19,7 @@ public abstract class Verrichting {
 
 
 	@SuppressWarnings("unused")
-	private Verrichting() {
+	public Verrichting() {
 	}
 
 	public Verrichting(double bedrag) {

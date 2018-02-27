@@ -1,10 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {HomeKlantDto} from '../../../dto/home-klant-dto';
 import {KlantType} from '../../../dto/klant-type';
 import {AankoopOverzicht} from '../../../model/aankoop-overzicht';
 import {BarService} from '../../../service/bar.service';
 import {HomeService} from '../../../service/home.service';
+import {AfrekenDialogComponent} from '../afreken-dialog/afreken-dialog.component';
 
 @Component({
   selector: 'app-aankoop-dialog',
@@ -15,7 +16,7 @@ export class AankoopDialogComponent implements OnInit {
 
   public aankoopOverzicht: AankoopOverzicht;
 
-  constructor(public dialogRef: MatDialogRef<AankoopDialogComponent>, @Inject(MAT_DIALOG_DATA) public klant: HomeKlantDto, public barService: BarService, public homeService: HomeService) {
+  constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<AankoopDialogComponent>, @Inject(MAT_DIALOG_DATA) public klant: HomeKlantDto, public barService: BarService, public homeService: HomeService) {
     this.aankoopOverzicht = new AankoopOverzicht(this.barService.producten);
   }
 
@@ -38,10 +39,20 @@ export class AankoopDialogComponent implements OnInit {
     this.aankoopOverzicht.removeProductAankoop(this.klant.persoonId, product.id, this.klant.type == KlantType.LID ? product.prijsLid : product.prijsGast);
   }
 
-  private processAankopen() {
+  private processAankopen(): Promise<boolean> {
     if (this.aankoopOverzicht.commands) {
-      this.homeService.processAankopen(this.aankoopOverzicht.commands);
+      return this.homeService.processAankopen(this.aankoopOverzicht.commands);
     }
+    return Promise.resolve(true);
+  }
+
+  public afrekenen() {
+    this.dialogRef.close('afrekenen');
+    this.processAankopen().then(() =>
+    this.dialog.open(AfrekenDialogComponent, {
+      data: this.klant.persoonId,
+      width: '400px'
+    }));
   }
 
 }

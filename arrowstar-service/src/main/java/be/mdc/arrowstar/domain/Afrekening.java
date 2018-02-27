@@ -16,6 +16,8 @@ public class Afrekening extends Verrichting {
 	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	private List<Aankoop> aankopen;
 
+	public Afrekening() {
+	}
 
 	public Afrekening(int persoonId, List<Aankoop> aankopen) {
 		super(aankopen.stream().mapToDouble(aankoop -> aankoop.getPrijs()).sum());

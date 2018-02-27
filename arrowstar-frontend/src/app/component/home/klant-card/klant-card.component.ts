@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {HomeKlantDto} from "../../../dto/home-klant-dto";
+import {HomeKlantDto} from '../../../dto/home-klant-dto';
+import {AankoopOverzicht} from '../../../model/aankoop-overzicht';
+import {BarService} from '../../../service/bar.service';
 import {AankoopDialogComponent} from '../aankoop-dialog/aankoop-dialog.component';
 import {CreateKlantDialogComponent} from '../create-klant-dialog/create-klant-dialog.component';
 
@@ -11,11 +13,16 @@ import {CreateKlantDialogComponent} from '../create-klant-dialog/create-klant-di
 })
 export class KlantCardComponent implements OnInit {
 
-  @Input("klant") public klant: HomeKlantDto;
+  @Input('klant') public klant: HomeKlantDto;
+  public aankoopOverzicht: AankoopOverzicht;
 
-  constructor(public dialog: MatDialog) { }
+
+  constructor(public dialog: MatDialog, private barService: BarService) {
+    this.aankoopOverzicht = new AankoopOverzicht(this.barService.producten);
+  }
 
   ngOnInit() {
+    this.klant.aankopen.forEach(aankoop => this.aankoopOverzicht.addAankoop(aankoop));
   }
 
   openDialog(): void {

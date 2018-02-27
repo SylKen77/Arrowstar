@@ -21,7 +21,7 @@ public class GastController {
 		return (all ? gastService.getAlleGasten() : gastService.getActieveGasten()).collect(Collectors.toList());
 	}
 
-	@PostMapping
+	@PostMapping("/create")
 	@ResponseStatus(HttpStatus.OK)
 	public void createGast(@RequestBody CreateGastCommand createGastCommand) {
 		gastService.createGast(createGastCommand);

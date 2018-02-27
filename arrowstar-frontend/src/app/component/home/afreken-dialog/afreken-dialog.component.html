@@ -1,0 +1,27 @@
+<h1 mat-dialog-title class="mat-headline">Afrekenen</h1>
+
+<mat-dialog-content style="height: 200px">
+
+  <div class="afrekenOverzicht">
+    <div *ngFor="let aankopenVoorProduct of aankoopOverzicht.aankopenPerProduct">
+      {{aankopenVoorProduct.productOmschrijving}} #{{aankopenVoorProduct.aantal}}: {{aankopenVoorProduct.totaalPrijs | currency:'EUR'}}
+    </div>
+    <div>Totaal: {{aankoopOverzicht.totaalPrijs | currency:'EUR'}}</div>
+  </div>
+
+  <mat-form-field>
+    <input matInput [(ngModel)]="gegeven" placeholder="gegeven" type="number" class="gegevenBedrag" (ngModelChange)="berekenTerugBedrag()">
+    <span matPrefix>&euro;&nbsp;</span>
+    <span matSuffix></span>
+  </mat-form-field>
+
+  <div>
+    Terug: {{terugBedrag | currency:'EUR'}}
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="ok()" [disabled]="!okActief">ok</button>
+  <button mat-button [mat-dialog-close]="'cancel'">cancel</button>
+</mat-dialog-actions>

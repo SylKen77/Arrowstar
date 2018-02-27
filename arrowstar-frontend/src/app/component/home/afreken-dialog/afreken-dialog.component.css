@@ -1,0 +1,8 @@
+.gegevenBedrag {
+  text-align: right;
+}
+
+input.gegevenBedrag::-webkit-outer-spin-button,
+input.gegevenBedrag::-webkit-inner-spin-button {
+  display: none;
+}

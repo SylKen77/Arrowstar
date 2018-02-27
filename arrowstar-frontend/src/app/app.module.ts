@@ -40,6 +40,7 @@ import { ProductCardComponent } from './component/bar/product-card/product-card.
 import { HomeComponent } from './component/home/home.component';
 import { KassaComponent } from './component/kassa/kassa.component';
 import { AankoopDialogComponent } from './component/home/aankoop-dialog/aankoop-dialog.component';
+import { AfrekenDialogComponent } from './component/home/afreken-dialog/afreken-dialog.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { AankoopDialogComponent } from './component/home/aankoop-dialog/aankoop-
     ProductCardComponent,
     HomeComponent,
     KassaComponent,
-    AankoopDialogComponent
+    AankoopDialogComponent,
+    AfrekenDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +94,7 @@ import { AankoopDialogComponent } from './component/home/aankoop-dialog/aankoop-
     MatToolbarModule,
     MatTooltipModule
   ],
-  entryComponents: [CreateKlantDialogComponent, AankoopDialogComponent],
+  entryComponents: [CreateKlantDialogComponent, AankoopDialogComponent, AfrekenDialogComponent],
   providers: [HomeService, BarService],
   bootstrap: [AppComponent]
 })
