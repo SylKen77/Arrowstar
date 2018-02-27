@@ -5,12 +5,13 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value;
 
 @Value.Immutable
-@JsonSerialize(as = ImmutableCreateAankoopCommand.class)
-@JsonDeserialize(as = ImmutableCreateAankoopCommand.class)
-public interface CreateAankoopCommand {
+@JsonSerialize(as = ImmutableAankoopCommand.class)
+@JsonDeserialize(as = ImmutableAankoopCommand.class)
+public interface AankoopCommand {
 
-	int getPersoonId();
+    int getPersoonId();
 
-	int getProductId();
+    int getProductId();
 
+    AankoopCommandType getType();
 }

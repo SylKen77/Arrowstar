@@ -1,7 +1,10 @@
 package be.mdc.arrowstar.service;
 
 import be.mdc.arrowstar.command.*;
-import be.mdc.arrowstar.domain.*;
+import be.mdc.arrowstar.domain.Afrekening;
+import be.mdc.arrowstar.domain.Kassa;
+import be.mdc.arrowstar.domain.Persoon;
+import be.mdc.arrowstar.domain.Product;
 import be.mdc.arrowstar.dto.KassaDTO;
 import be.mdc.arrowstar.dto.KlantDTO;
 import be.mdc.arrowstar.dto.ProductDTO;
@@ -9,17 +12,20 @@ import be.mdc.arrowstar.mapper.KassaMapper;
 import be.mdc.arrowstar.mapper.KlantMapper;
 import be.mdc.arrowstar.mapper.ProductMapper;
 import be.mdc.arrowstar.repository.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @Transactional
 public class KassaService {
+
+    private Logger logger = LoggerFactory.getLogger(KassaService.class);
 
 	@Autowired private PersoonRepository persoonRepository;
 	@Autowired private LidRepository lidRepository;
@@ -35,25 +41,25 @@ public class KassaService {
 		return kassaMapper.kassaToKassaDto(getKassa());
 	}
 
-	public Stream<KlantDTO> getKlanten() {
+	public List<KlantDTO> getKlanten() {
 		List<KlantDTO> klanten = lidRepository.findAllByVerwijderdOpIsNullAndZichtbaarOpHomeScreenIsTrue().map(klantMapper::lidToKlantDto).collect(Collectors.toList());
 		klanten.addAll(gastRepository.findAllByAfgerekendIsFalse().map(klantMapper::gastToKlantDto).collect(Collectors.toList()));
-		return klanten.stream();
+		return klanten;
 	}
 
-	public Stream<ProductDTO> getProducten() {
-		return productRepository.findByZichtbaarIsTrueAndVerwijderdOpIsNull().map(productMapper::productToProductDto);
+	public List<ProductDTO> getProducten() {
+		return productRepository.findByZichtbaarIsTrueAndVerwijderdOpIsNull().map(productMapper::productToProductDto).collect(Collectors.toList());
 	}
 
-	public void createAankoop(CreateAankoopCommand createAankoopCommand) {
-		Persoon persoon = persoonRepository.findOne(createAankoopCommand.getPersoonId());
-		Product product = productRepository.findOne(createAankoopCommand.getProductId());
-		persoon.addAankoop(product);
-	}
-
-	public void deleteAankoop(DeleteAankoopCommand deleteAankoopCommand) {
-		Persoon persoon = persoonRepository.findOne(deleteAankoopCommand.getPersoonId());
-		persoon.verwijderAankoop(deleteAankoopCommand.getProductId());
+	public void processAankoop(AankoopCommand aankoopCommand) {
+	    logger.info("processAankoop: " + aankoopCommand);
+		Persoon persoon = persoonRepository.findOne(aankoopCommand.getPersoonId());
+		Product product = productRepository.findOne(aankoopCommand.getProductId());
+ 		if (aankoopCommand.getType() == AankoopCommandType.CREATE) {
+            persoon.addAankoop(product);
+        } else {
+		    persoon.verwijderAankoop(aankoopCommand.getProductId());
+        }
 	}
 
 	public void afrekenen(CreateAfrekeningCommand createAfrekeningCommand) {
@@ -81,5 +87,9 @@ public class KassaService {
 		}
 		return kassaList.get(0);
 	}
+
+    public void processAankopen(List<AankoopCommand> aankopen) {
+	    aankopen.forEach(aankoopCommand -> processAankoop(aankoopCommand));
+    }
 
 }

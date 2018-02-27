@@ -17,51 +17,58 @@ import java.util.stream.Collectors;
 @RequestMapping("/kassa")
 public class KassaController {
 
-	@Autowired private KassaService kassaService;
+    @Autowired
+    private KassaService kassaService;
 
-	@GetMapping
-	public KassaDTO getKassa() {
-		return kassaService.getKassaDTO();
-	}
+    @GetMapping
+    public KassaDTO getKassa() {
+        return kassaService.getKassaDTO();
+    }
 
-	@GetMapping("/klanten")
-	public List<KlantDTO> getKlanten() {
-		return kassaService.getKlanten().sorted(Comparator.comparing(KlantDTO::getType).thenComparing(KlantDTO::getNaam)).collect(Collectors.toList());
-	}
+    @GetMapping("/klanten")
+    public List<KlantDTO> getKlanten() {
+        return kassaService.getKlanten().stream().sorted(Comparator.comparing(KlantDTO::getType).thenComparing(KlantDTO::getNaam)).collect(Collectors.toList());
+    }
 
-	@GetMapping("/producten")
-	public List<ProductDTO> getProducten() {
-		return kassaService.getProducten().sorted(Comparator.comparing(ProductDTO::getSortOrder).thenComparing(ProductDTO::getNaam)).collect(Collectors.toList());
-	}
+    @GetMapping("/producten")
+    public List<ProductDTO> getProducten() {
+        return kassaService.getProducten().stream().sorted(Comparator.comparing(ProductDTO::getSortOrder).thenComparing(ProductDTO::getNaam)).collect(Collectors.toList());
+    }
 
-	@PostMapping("/aankoop/create")
-	@ResponseStatus(HttpStatus.OK)
-	public void createAankoop(@RequestBody CreateAankoopCommand createAankoopCommand) {
-		kassaService.createAankoop(createAankoopCommand);
-	}
+    @PostMapping("/aankopen/process")
+    @ResponseStatus(HttpStatus.OK)
+    public void processAankopen(@RequestBody List<AankoopCommand> aankopen) {
+        kassaService.processAankopen(aankopen);
+    }
 
-	@PostMapping("/aankoop/delete")
-	@ResponseStatus(HttpStatus.OK)
-	public void deleteAankoop(@RequestBody DeleteAankoopCommand deleteAankoopCommand) {
-		kassaService.deleteAankoop(deleteAankoopCommand);
-	}
+    @PostMapping("/aankoop/create")
+    @ResponseStatus(HttpStatus.OK)
+    public void createAankoop(@RequestBody AankoopCommand aankoopCommand) {
+        kassaService.processAankoop(aankoopCommand);
+    }
 
-	@PostMapping("/afrekenen")
-	@ResponseStatus(HttpStatus.OK)
-	public void afrekenen(@RequestBody CreateAfrekeningCommand createAfrekeningCommand) {
-		kassaService.afrekenen(createAfrekeningCommand);
-	}
+    @PostMapping("/aankoop/delete")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteAankoop(@RequestBody AankoopCommand aankoopCommand) {
+        kassaService.processAankoop(aankoopCommand);
+    }
 
-	@PostMapping("/tellen")
-	@ResponseStatus(HttpStatus.OK)
-	public void tellen(@RequestBody CreateTellingCommand createTellingCommand) {
-		kassaService.telling(createTellingCommand);
-	}
+    @PostMapping("/afrekenen")
+    @ResponseStatus(HttpStatus.OK)
+    public void afrekenen(@RequestBody CreateAfrekeningCommand createAfrekeningCommand) {
+        kassaService.afrekenen(createAfrekeningCommand);
+    }
 
-	@PostMapping("/afsluiten")
-	@ResponseStatus(HttpStatus.OK)
-	public void afsluiten(@RequestBody CreateAfsluitingCommand createAfsluitingCommand) {
-		kassaService.afsluiten(createAfsluitingCommand);
-	}
+    @PostMapping("/tellen")
+    @ResponseStatus(HttpStatus.OK)
+    public void tellen(@RequestBody CreateTellingCommand createTellingCommand) {
+        kassaService.telling(createTellingCommand);
+    }
+
+    @PostMapping("/afsluiten")
+    @ResponseStatus(HttpStatus.OK)
+    public void afsluiten(@RequestBody CreateAfsluitingCommand createAfsluitingCommand) {
+        kassaService.afsluiten(createAfsluitingCommand);
+    }
 
 }

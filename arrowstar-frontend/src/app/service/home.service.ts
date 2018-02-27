@@ -2,9 +2,10 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
+import {AankoopCommand} from '../command/aankoop-command';
 import {CreateGastCommand} from '../command/create-gast-command';
 import {CreateLidCommand} from '../command/create-lid-command';
-import {HomeKlantDto} from '../model/home-klant-dto';
+import {HomeKlantDto} from '../dto/home-klant-dto';
 
 @Injectable()
 export class HomeService {
@@ -32,6 +33,13 @@ export class HomeService {
 
   public createGast(createGastCommand: CreateGastCommand) {
     this.httpCient.post('/api/gast/create', createGastCommand)
+      .subscribe(
+        () => this.loadKlanten(),
+        err => console.log(err));
+  }
+
+  public processAankopen(aankopen: AankoopCommand[]) {
+    this.httpCient.post('/api/kassa/aankopen/process', aankopen)
       .subscribe(
         () => this.loadKlanten(),
         err => console.log(err));

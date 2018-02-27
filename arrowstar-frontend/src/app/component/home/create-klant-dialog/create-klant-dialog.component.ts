@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {CreateGastCommand} from '../../../command/create-gast-command';
 import {CreateLidCommand} from '../../../command/create-lid-command';
-import {KlantType} from '../../../model/klant-type';
+import {KlantType} from '../../../dto/klant-type';
 import {HomeService} from '../../../service/home.service';
 
 @Component({

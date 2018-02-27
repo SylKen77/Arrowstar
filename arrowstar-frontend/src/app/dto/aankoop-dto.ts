@@ -4,6 +4,6 @@ export interface AankoopDto {
   productOmschrijving: string;
   prijs: number;
   aangekochtOp: Date;
-  betaaldOp: Date;
+  betaaldOp?: Date;
 
 }

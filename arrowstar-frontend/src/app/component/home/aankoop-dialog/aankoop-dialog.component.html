@@ -1,0 +1,21 @@
+<h1 mat-dialog-title class="mat-headline">Aankopen</h1>
+
+<mat-dialog-content style="height: 200px">
+
+  <div class="aankoopForm">
+    <div *ngFor="let aankopenPerProduct of aankoopOverzicht.aankopenPerProduct">
+      {{aankopenPerProduct.productOmschrijving}}:
+      <button mat-button (click)="removeAankoop(aankopenPerProduct.productId)"><mat-icon>remove_circle_outline</mat-icon></button>
+      {{aankopenPerProduct.aantal}}
+      <button mat-button (click)="addAankoop(aankopenPerProduct.productId)"><mat-icon>add_circle_outline</mat-icon></button>
+
+    </div>
+  </div>
+  <div>totaal: {{aankoopOverzicht.totaalPrijs | currency:'EUR'}}</div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="ok()">ok</button>
+  <button mat-button [mat-dialog-close]="'cancel'">cancel</button>
+</mat-dialog-actions>

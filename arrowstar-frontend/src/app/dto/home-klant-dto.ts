@@ -3,7 +3,7 @@ import {AankoopDto} from "./aankoop-dto";
 
 export interface HomeKlantDto {
 
-  id: number;
+  persoonId: number;
   type: KlantType;
   naam: string;
   aankopen: AankoopDto[];

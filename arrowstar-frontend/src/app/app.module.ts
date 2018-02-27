@@ -33,11 +33,13 @@ import {AppComponent} from './app.component';
 import {CreateKlantCardComponent} from './component/home/create-klant-card/create-klant-card.component';
 import {CreateKlantDialogComponent} from './component/home/create-klant-dialog/create-klant-dialog.component';
 import {KlantCardComponent} from './component/home/klant-card/klant-card.component';
+import {BarService} from './service/bar.service';
 import {HomeService} from './service/home.service';
 import {BarComponent} from './component/bar/bar.component';
 import { ProductCardComponent } from './component/bar/product-card/product-card.component';
 import { HomeComponent } from './component/home/home.component';
 import { KassaComponent } from './component/kassa/kassa.component';
+import { AankoopDialogComponent } from './component/home/aankoop-dialog/aankoop-dialog.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { KassaComponent } from './component/kassa/kassa.component';
     BarComponent,
     ProductCardComponent,
     HomeComponent,
-    KassaComponent
+    KassaComponent,
+    AankoopDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -89,8 +92,8 @@ import { KassaComponent } from './component/kassa/kassa.component';
     MatToolbarModule,
     MatTooltipModule
   ],
-  entryComponents: [CreateKlantDialogComponent],
-  providers: [HomeService],
+  entryComponents: [CreateKlantDialogComponent, AankoopDialogComponent],
+  providers: [HomeService, BarService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
